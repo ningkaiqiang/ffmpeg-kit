@@ -505,7 +505,7 @@ ${SED_INLINE} 's/static int av_log_level/__thread int av_log_level/g' "${BASEDIR
   --strip="${STRIP}" \
   --nm="${NM}" \
   --extra-ldflags="$(get_min_version_cflags)" \
-  --disable-autodetect \
+  --disable-everything \
   --enable-cross-compile \
   --enable-pic \
   --enable-inline-asm \
@@ -513,37 +513,19 @@ ${SED_INLINE} 's/static int av_log_level/__thread int av_log_level/g' "${BASEDIR
   --enable-swscale \
   ${BUILD_LIBRARY_OPTIONS} \
   --enable-pthreads \
-  --disable-v4l2-m2m \
-  --disable-outdev=v4l2 \
-  --disable-outdev=fbdev \
-  --disable-indev=v4l2 \
-  --disable-indev=fbdev \
   ${SIZE_OPTIONS} \
-  --disable-xmm-clobber-test \
   ${DEBUG_OPTIONS} \
-  --disable-neon-clobber-test \
-  --disable-programs \
-  --disable-postproc \
-  --disable-doc \
-  --disable-htmlpages \
-  --disable-manpages \
-  --disable-podpages \
-  --disable-txtpages \
-  --disable-sndio \
-  --disable-schannel \
-  --disable-securetransport \
-  --disable-xlib \
-  --disable-cuda \
-  --disable-cuvid \
-  --disable-nvenc \
-  --disable-vaapi \
-  --disable-vdpau \
-  --disable-alsa \
-  --disable-cuda \
-  --disable-cuvid \
-  --disable-nvenc \
-  --disable-vaapi \
-  --disable-vdpau \
+  --enable-filter=volume \
+  --enable-decoder=mp3 \
+  --enable-encoder=libmp3lame \
+  --enable-decoder=mp3_at \
+  --enable-decoder=mp3float \
+  --enable-demuxer=mp3 \
+  --enable-muxer=mp3 \
+  --enable-parser=mpegaudio \
+  --enable-bsf=mp3_header_decompress \
+  --enable-protocol=file \
+  --enable-filter=scale \
   ${CONFIGURE_POSTFIX} 1>>"${BASEDIR}"/build.log 2>&1
 
 if [[ $? -ne 0 ]]; then
