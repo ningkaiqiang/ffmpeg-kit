@@ -302,6 +302,15 @@ create_ffmpeg_kit_universal_library() {
   local UNIVERSAL_LIBRARY_DIRECTORY="${BASEDIR}/.tmp/$(get_universal_library_directory "${ARCHITECTURE_VARIANT}")"
   local FFMPEG_KIT_UNIVERSAL_LIBRARY_DIRECTORY="${UNIVERSAL_LIBRARY_DIRECTORY}/${LIBRARY_NAME}"
   local LIPO="$(xcrun --sdk "$(get_default_sdk_name)" -f lipo)"
+  echo ------------------------variables------------------------
+  echo $TARGET_ARCH_LIST
+  echo $ARCHITECTURE_VARIANT
+  echo $TARGET_ARCHITECTURES
+  echo $LIBRARY_NAME
+  echo $UNIVERSAL_LIBRARY_DIRECTORY
+  echo $FFMPEG_KIT_UNIVERSAL_LIBRARY_DIRECTORY
+  echo $LIPO
+  echo ------------------------variables------------------------
 
   if [[ $(is_apple_architecture_variant_supported "${ARCHITECTURE_VARIANT}") -eq 0 ]]; then
 
@@ -313,24 +322,30 @@ create_ffmpeg_kit_universal_library() {
   initialize_folder "${FFMPEG_KIT_UNIVERSAL_LIBRARY_DIRECTORY}"
   initialize_folder "${FFMPEG_KIT_UNIVERSAL_LIBRARY_DIRECTORY}/include"
   initialize_folder "${FFMPEG_KIT_UNIVERSAL_LIBRARY_DIRECTORY}/lib"
-
+  echo initialize_folder success
   local FFMPEG_KIT_DEFAULT_BUILD_PATH="${BASEDIR}/prebuilt/$(get_default_build_directory)/ffmpeg-kit"
+  echo $FFMPEG_KIT_DEFAULT_BUILD_PATH
 
   # COPY HEADER FILES
   cp -r "${FFMPEG_KIT_DEFAULT_BUILD_PATH}"/include/* "${FFMPEG_KIT_UNIVERSAL_LIBRARY_DIRECTORY}"/include 1>>"${BASEDIR}"/build.log 2>&1
+  echo copy success
 
   local FFMPEG_KIT_UNIVERSAL_LIBRARY_PATH="${FFMPEG_KIT_UNIVERSAL_LIBRARY_DIRECTORY}/lib/libffmpegkit.dylib"
+  echo $FFMPEG_KIT_UNIVERSAL_LIBRARY_PATH
 
   LIPO_COMMAND="${LIPO} -create"
-
+  echo $LIPO_COMMAND
   for ARCH in "${TARGET_ARCH_LIST[@]}"; do
     if [[ " ${TARGET_ARCHITECTURES[*]} " == *" ${ARCH} "* ]]; then
       local FULL_LIBRARY_PATH="${BASEDIR}/prebuilt/$(get_build_directory)/${LIBRARY_NAME}/lib/libffmpegkit.dylib"
+      echo $FULL_LIBRARY_PATH
       LIPO_COMMAND+=" ${FULL_LIBRARY_PATH}"
+      echo $LIPO_COMMAND
     fi
   done
 
   LIPO_COMMAND+=" -output ${FFMPEG_KIT_UNIVERSAL_LIBRARY_PATH}"
+  echo $LIPO_COMMAND
 
   ${LIPO_COMMAND} 1>>"${BASEDIR}"/build.log 2>&1
 

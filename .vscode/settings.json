@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.md": "markdown",
+        "bsf.h": "c",
+        "avcodec.h": "c"
+    }
+}

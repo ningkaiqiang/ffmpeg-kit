@@ -58,6 +58,7 @@ if [[ ${FFMPEG_KIT_BUILD_TYPE} != "macos" ]]; then
   ${SED_INLINE} 's/${wl}dynamic_lookup//g' configure 1>>"${BASEDIR}"/build.log 2>&1 || return 1
 fi
 
+echo "config started"
 ./configure \
   --prefix="${FFMPEG_KIT_LIBRARY_PATH}" \
   --with-pic \
@@ -67,10 +68,13 @@ fi
   --disable-fast-install \
   --disable-maintainer-mode \
   --host="${HOST}" 1>>"${BASEDIR}"/build.log 2>&1
+echo "config ended"
 
 # WORKAROUND FOR clang: warning: using sysroot for 'MacOSX' but targeting 'iPhone'
 ${SED_INLINE} "s|allow_undefined_flag -o|allow_undefined_flag -target $(get_target) -o|g" libtool 1>>"${BASEDIR}"/build.log 2>&1
 ${SED_INLINE} 's|\$rpath/\\$soname|@rpath/ffmpegkit.framework/ffmpegkit|g' libtool 1>>"${BASEDIR}"/build.log 2>&1
+
+echo "sed success"
 
 if [ $? -ne 0 ]; then
   echo -e "failed\n\nSee build.log for details\n"
@@ -81,11 +85,11 @@ fi
 if [ -d "${FFMPEG_KIT_LIBRARY_PATH}" ]; then
   rm -rf "${FFMPEG_KIT_LIBRARY_PATH}" 1>>"${BASEDIR}"/build.log 2>&1 || return 1
 fi
-
+echo "make start"
 make -j$(get_cpu_count) 1>>"${BASEDIR}"/build.log 2>&1
-
+echo "make success"
 make install 1>>"${BASEDIR}"/build.log 2>&1
-
+echo "make install success"
 if [ $? -eq 0 ]; then
   echo "ok"
 else

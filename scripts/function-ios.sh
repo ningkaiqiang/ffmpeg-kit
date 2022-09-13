@@ -547,8 +547,11 @@ create_universal_libraries_for_ios_xcframeworks() {
   echo -e "INFO: Building universal libraries for xcframeworks using ${TARGET_ARCH_LIST[@]}\n" 1>>"${BASEDIR}"/build.log 2>&1
 
   create_ffmpeg_universal_library "${ARCH_VAR_IPHONEOS}"
+  echo "ARCH_VAR_IPHONEOS success"
   create_ffmpeg_universal_library "${ARCH_VAR_IPHONESIMULATOR}"
+  echo "ARCH_VAR_IPHONESIMULATOR success"
   create_ffmpeg_universal_library "${ARCH_VAR_MAC_CATALYST}"
+  echo "ARCH_VAR_MAC_CATALYST success"
 
   create_ffmpeg_kit_universal_library "${ARCH_VAR_IPHONEOS}"
   create_ffmpeg_kit_universal_library "${ARCH_VAR_IPHONESIMULATOR}"
