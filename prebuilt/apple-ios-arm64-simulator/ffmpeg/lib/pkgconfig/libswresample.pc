@@ -1,0 +1,14 @@
+prefix=/Users/nkq/Downloads/Audio/ffmpeg-kit/prebuilt/apple-ios-arm64-simulator/ffmpeg
+exec_prefix=${prefix}
+libdir=/Users/nkq/Downloads/Audio/ffmpeg-kit/prebuilt/apple-ios-arm64-simulator/ffmpeg/lib
+includedir=/Users/nkq/Downloads/Audio/ffmpeg-kit/prebuilt/apple-ios-arm64-simulator/ffmpeg/include
+
+Name: libswresample
+Description: FFmpeg audio resampling library
+Version: 4.7.100
+Requires: 
+Requires.private: libavutil >= 57.28.100
+Conflicts:
+Libs: -L${libdir}  -lswresample 
+Libs.private: -lm
+Cflags: -I${includedir}

@@ -1,0 +1,14 @@
+prefix=/Users/nkq/Downloads/Audio/ffmpeg-kit/prebuilt/apple-ios-x86_64/ffmpeg
+exec_prefix=${prefix}
+libdir=/Users/nkq/Downloads/Audio/ffmpeg-kit/prebuilt/apple-ios-x86_64/ffmpeg/lib
+includedir=/Users/nkq/Downloads/Audio/ffmpeg-kit/prebuilt/apple-ios-x86_64/ffmpeg/include
+
+Name: libavutil
+Description: FFmpeg utility library
+Version: 57.28.100
+Requires: 
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavutil 
+Libs.private: -pthread -lm -framework CoreFoundation -framework CoreVideo -framework CoreMedia
+Cflags: -I${includedir}

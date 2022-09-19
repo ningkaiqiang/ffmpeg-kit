@@ -1,0 +1,14 @@
+prefix=/Users/nkq/Downloads/Audio/ffmpeg-kit/prebuilt/apple-ios-arm64-simulator/ffmpeg
+exec_prefix=${prefix}
+libdir=/Users/nkq/Downloads/Audio/ffmpeg-kit/prebuilt/apple-ios-arm64-simulator/ffmpeg/lib
+includedir=/Users/nkq/Downloads/Audio/ffmpeg-kit/prebuilt/apple-ios-arm64-simulator/ffmpeg/include
+
+Name: libavfilter
+Description: FFmpeg audio/video filtering library
+Version: 8.44.100
+Requires: 
+Requires.private: libswscale >= 6.7.100, libavutil >= 57.28.100
+Conflicts:
+Libs: -L${libdir}  -lavfilter 
+Libs.private: -pthread -lm
+Cflags: -I${includedir}
