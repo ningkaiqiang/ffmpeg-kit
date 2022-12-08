@@ -525,6 +525,7 @@ ${SED_INLINE} 's/static int av_log_level/__thread int av_log_level/g' "${BASEDIR
   --enable-parser=mpegaudio \
   --enable-bsf=mp3_header_decompress \
   --enable-protocol=file \
+  --enable-protocol=concat \
   --enable-filter=scale \
   ${CONFIGURE_POSTFIX} 1>>"${BASEDIR}"/build.log 2>&1
 
